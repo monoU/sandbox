@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 1
+  name: MyString
+  name_ja: MyString
+  cost: MyString
+  expansion: MyString
+  colour: MyString
+  type: 
+  power: 1
+  toughness: 1
+  artist: MyString
+  rarity: MyString
+
+two:
+  number: 1
+  name: MyString
+  name_ja: MyString
+  cost: MyString
+  expansion: MyString
+  colour: MyString
+  type: 
+  power: 1
+  toughness: 1
+  artist: MyString
+  rarity: MyString
