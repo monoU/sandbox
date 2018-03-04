@@ -1,0 +1,28 @@
+<%= form_for @card do |f| %>
+  <%= f.label :number %>
+  <%= f.number_field :number %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :name_ja %>
+  <%= f.text_field :name_ja %>
+  <%= f.label :cost %>
+  <%= f.text_field :cost %>
+  <%= f.label :expansion %>
+  <%= f.text_field :expansion %>
+  <%= f.label :colour %>
+  <%= f.text_field :colour %>
+  <%= f.label :types %>
+  <%= f.text_field :types %>
+  <%= f.label :power %>
+  <%= f.number_field :power %>
+  <%= f.label :toughness %>
+  <%= f. number_field :toughness %>
+  <%= f.label :artist %>
+  <%= f.text_field :artist %>
+  <%= f.label :rarity %>
+  <%= f.text_field :rarity %>
+
+  <div>
+    <%= f.submit "追加", class:'btn btn-sm btn-primary'%>
+  </div>
+<% end %>
