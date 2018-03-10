@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180304074728) do
+ActiveRecord::Schema.define(version: 20180310063514) do
 
   create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "number"
@@ -31,10 +31,12 @@ ActiveRecord::Schema.define(version: 20180304074728) do
 
   create_table "expansions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
+    t.string "name_ja"
     t.string "abbr"
-    t.date "released_at"
+    t.integer "released_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["abbr"], name: "index_expansions_on_abbr"
   end
 
   create_table "members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

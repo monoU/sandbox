@@ -1,0 +1,15 @@
+<h1>エキスパンション追加</h1>
+
+<%= form_for @expansion do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, required: true %>
+  <%= f.label :name_ja %>
+  <%= f.text_field :name_ja, required: true %>
+  <%= f.label :abbr %>
+  <%= f.text_field :abbr, required: true %>
+  <%= f.label :released_at %>
+  <%= f.number_field :released_at, required: true %>
+  <div>
+    <%= f.submit "追加", class:'btn btn-sm btn-primary'%>
+  </div>
+<% end %>

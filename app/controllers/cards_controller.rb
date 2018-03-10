@@ -1,14 +1,16 @@
 class CardsController < ApplicationController
   def index
-    @cards = Card.all
+    @search = Search::Card.new
+  end
+
+  def search
+    @search = Search::Card.new(search_card_parameters)
+    # 検索条件によって検索
+    @cards = @search.match
   end
 
   def new
     @card = Card.new
-  end
-
-  def show
-
   end
 
   def create
@@ -73,5 +75,9 @@ class CardsController < ApplicationController
 
   def card_parameters
     params.require(:card).permit(:id, :number, :name, :name_ja, :cost, :expansion, :colour, :types, :power, :toughness, :artist, :rarity)
+  end
+
+  def search_card_parameters
+    params.require(:search_card).permit(:expansion, :types)
   end
 end

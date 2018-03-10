@@ -1,0 +1,32 @@
+<h1>エキスパンション一覧</h1>
+
+<hr>
+<div>
+  <%= link_to "追加", new_expansion_path %>
+</div>
+
+<hr>
+<div class="contents">
+  <table>
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>name_ja</th>
+        <th>abbreviation</th>
+        <th>releaed_at</th>
+        <th>delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @expansions.each do |expansion| %>
+        <tr>
+          <td><%= expansion.name %></td>
+          <td><%= expansion.name_ja %></td>
+          <td><%= expansion.abbr %></td>
+          <td><%= expansion.released_at %></td>
+          <td><%= link_to "削除", expansion_path(id: expansion.id), method: :delete, data: { confirm: "本当に削除しますか"} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

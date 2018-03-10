@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get "cards/index"
-  resources :cards do
+  resources :expansions, except: [:show]
+
+  resources :cards, except: [:show] do
     collection do
-      post :find
+      post :search
       post :import
       post :destroy_all
     end
