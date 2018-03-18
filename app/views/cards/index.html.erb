@@ -4,15 +4,15 @@
 <div class="serach_form">
   <%= form_for(@search, url: search_cards_path, method: :post) do |f| %>
     <div>
-      <h3>エキスパンション</h3>
+      <p>エキスパンション</p>
       <%= f.select :expansion, Expansion.all.order(:released_at).map{|e| [e.abbr, e.name]} %>
     </div>
     <div>
-      <h3>カードタイプ</h3>
+      <p>カードタイプ</p>
       <%= f.text_field :types %>
     </div>
     <div>
-      <%= f.submit "検索", class:'btn btn-sm btn-primary'%>  
+      <%= f.submit "検索", class:'btn btn-sm btn-primary' %>
     </div>
   <% end %>
 </div>
