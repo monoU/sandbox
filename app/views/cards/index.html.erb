@@ -1,12 +1,12 @@
 <div class="card_header">
   <h1>
     カード検索　
-    <%= link_to "インポート", import_cards_path, method: :post, class:"btn btn-sm btn-default pull-right" %>
+    <%= link_to "全削除", destroy_all_cards_path, method: :post, data: {confirm: "本当に削除しますか？"}, class:'btn btn-sm btn-danger pull-right right' %>
+    <%= link_to "インポート", import_cards_path, method: :post, class:"btn btn-sm btn-default pull-right right" %>
+    <%= link_to "追加", new_card_path, class:'btn btn-sm btn-default pull-right right' %>
   </h1>
 </div>
 
-
-<hr>
 <div class="search_form">
   <fieldset class="form-group">
     <%= form_for(@search, url: search_cards_path, method: :post) do |f| %>
@@ -30,14 +30,14 @@
   </fieldset>
 </div>
 
-<% if @action != "index" %>
+<% if @action == "search" # partial_renderとかで実現したい %>
+
   <h1>検索結果</h1>
   <%= "#{@cards.count} 件ヒットしました。"%>
 
   <hr>
   <div>
-    <%= link_to "追加", new_card_path, class:'btn btn-sm btn-primary' %>
-    <%= link_to "全削除", destroy_all_cards_path, method: :post, data: {confirm: "本当に削除しますか"}, class:'btn btn-sm btn-danger' %>
+
   </div>
   
   <hr>

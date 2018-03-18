@@ -2,13 +2,14 @@ class CardsController < ApplicationController
   def index
     @search = Search::Card.new
     @cards = {}
-    @action = "index"
   end
 
   def search
     @search = Search::Card.new(search_card_parameters)
     # 検索条件によって検索
     @cards = @search.match
+    @action = "search"
+
     render :action => "index"
   end
 
@@ -51,7 +52,7 @@ class CardsController < ApplicationController
               when "神話レア" then @card.rarity = 0
               when "レア" then @card.rarity = 1
               when "アンコモン" then @card.rarity = 2
-              when "コモン" then @card.rarity =3
+              else @card.rarity = 3
             end
             @card.save!
             count += 1
