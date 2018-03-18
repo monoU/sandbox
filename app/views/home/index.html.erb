@@ -1,4 +1,4 @@
-<div class="head">
+<div class="home_header">
   <div class="login_info">
     <% if user_signed_in? %>
       Logged in as <strong><%= current_user.email %></strong>.
@@ -17,7 +17,16 @@
 </div>
 
 <div class="body">
-  <%= link_to "カードリスト", {:controller => "cards", :action => "index"}%>
-  <%= link_to "エキスパンション", {:controller => "expansions", :action => "index"}%>
+  <div class="page_title">
+    <h2>コンテンツ</h2>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <%= link_to "カードリスト", {:controller => "cards", :action => "index"}%>
+    </li>
+    <li class="list-group-item">
+      <%= link_to "エキスパンション", {:controller => "expansions", :action => "index"}%>
+    </li>
+  </ul>  
 </div>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180318075548) do
+ActiveRecord::Schema.define(version: 20180318144045) do
 
   create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "number"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20180318075548) do
     t.integer "power"
     t.integer "toughness"
     t.string "artist"
-    t.string "rarity"
+    t.integer "rarity", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["number", "expansion"], name: "index_cards_on_number_and_expansion", unique: true

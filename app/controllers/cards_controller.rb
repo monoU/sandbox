@@ -1,12 +1,15 @@
 class CardsController < ApplicationController
   def index
     @search = Search::Card.new
+    @cards = {}
+    @action = "index"
   end
 
   def search
     @search = Search::Card.new(search_card_parameters)
     # 検索条件によって検索
     @cards = @search.match
+    render :action => "index"
   end
 
   def new
@@ -44,7 +47,12 @@ class CardsController < ApplicationController
           elsif line.match(/\p{blank}*セット：/)
             @card.expansion = line.sub(/\p{blank}*セット：/, '').chomp
           elsif line.match(/\p{blank}*稀少度：/)
-            @card.rarity = line.sub(/\p{blank}*稀少度：/, '').chomp
+            case (line.sub(/\p{blank}*稀少度：/, '').chomp)
+              when "神話レア" then @card.rarity = 0
+              when "レア" then @card.rarity = 1
+              when "アンコモン" then @card.rarity = 2
+              when "コモン" then @card.rarity =3
+            end
             @card.save!
             count += 1
           end
@@ -78,6 +86,6 @@ class CardsController < ApplicationController
   end
 
   def search_card_parameters
-    params.require(:search_card).permit(:expansion, :types)
+    params.require(:search_card).permit(:expansion, :types, :rarity)
   end
 end

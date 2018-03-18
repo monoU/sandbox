@@ -1,18 +1,82 @@
-<h1>カード検索</h1>
+<div class="card_header">
+  <h1>
+    カード検索　
+    <%= link_to "インポート", import_cards_path, method: :post, class:"btn btn-sm btn-default pull-right" %>
+  </h1>
+</div>
+
 
 <hr>
-<div class="serach_form">
-  <%= form_for(@search, url: search_cards_path, method: :post) do |f| %>
-    <div>
-      <p>エキスパンション</p>
-      <%= f.select :expansion, Expansion.all.order(:released_at).map{|e| [e.abbr, e.name]} %>
-    </div>
-    <div>
-      <p>カードタイプ</p>
-      <%= f.text_field :types %>
-    </div>
-    <div>
-      <%= f.submit "検索", class:'btn btn-sm btn-primary' %>
-    </div>
-  <% end %>
+<div class="search_form">
+  <fieldset class="form-group">
+    <%= form_for(@search, url: search_cards_path, method: :post) do |f| %>
+      <div class="form-group">
+        <legend>エキスパンション</legend>
+        <%= f.select :expansion, Expansion.all.order(:released_at).map{|e| [e.abbr, e.name]}, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <legend>カードタイプ</legend>
+        <%= f.text_field :types, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <legend>レアリティ</legend>
+        <%= f.select :rarity, Card.rarities.keys.to_a, {}, class: "form-control" %>
+      </div>
+      <hr>
+      <div>
+        <%= f.submit "検索", class:'btn btn-sm btn-primary'%>  
+      </div>
+    <% end %>
+  </fieldset>
 </div>
+
+<% if @action != "index" %>
+  <h1>検索結果</h1>
+  <%= "#{@cards.count} 件ヒットしました。"%>
+
+  <hr>
+  <div>
+    <%= link_to "追加", new_card_path, class:'btn btn-sm btn-primary' %>
+    <%= link_to "全削除", destroy_all_cards_path, method: :post, data: {confirm: "本当に削除しますか"}, class:'btn btn-sm btn-danger' %>
+  </div>
+  
+  <hr>
+  <div class="contents">
+    <table>
+      <thead>
+        <tr>
+          <th>number</th>
+          <th>name</th>
+          <th>name_ja</th>
+          <th>cost</th>
+          <th>expansion</th>
+          <th>types</th>
+          <th>power</th>
+          <th>toughness</th>
+          <th>artist</th>
+          <th>rarity</th>
+          <th>show</th>
+          <th>delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cards.each do |card| %>
+          <tr>
+            <td><%= card.number %></td>
+            <td><%= card.name %></td>
+            <td><%= card.name_ja %></td>
+            <td><%= card.cost %></td>
+            <td><%= card.expansion %></td>
+            <td><%= card.types %></td>
+            <td><%= card.power %></td>
+            <td><%= card.toughness %></td>
+            <td><%= card.artist %></td>
+            <td><%= card.rarity %></td>
+            <td><%= link_to "詳細", card_path(id: card.id) %></td>
+            <td><%= link_to "削除", card_path(id: card.id), method: :delete, data: { confirm: "本当に削除しますか"} %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
