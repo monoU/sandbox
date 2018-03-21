@@ -5,6 +5,7 @@
     <%= link_to "インポート", import_cards_path, method: :post, class:"btn btn-sm btn-default pull-right right" %>
     <%= link_to "追加", new_card_path, class:'btn btn-sm btn-default pull-right right' %>
   </h1>
+  <hr>
 </div>
 
 <div class="search_form">
@@ -31,17 +32,10 @@
 </div>
 
 <% if @action == "search" # partial_renderとかで実現したい %>
-
-  <h1>検索結果</h1>
-  <%= "#{@cards.count} 件ヒットしました。"%>
-
   <hr>
-  <div>
-
-  </div>
-  
-  <hr>
-  <div class="contents">
+  <div class="results">
+    <h1>検索結果</h1>
+    <%= "#{@cards.count} 件ヒットしました。"%>
     <table>
       <thead>
         <tr>
