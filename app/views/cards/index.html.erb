@@ -12,6 +12,10 @@
   <fieldset class="form-group">
     <%= form_for(@search, url: search_cards_path, method: :post) do |f| %>
       <div class="form-group">
+        <legend>カード名</legend>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
         <legend>エキスパンション</legend>
         <%= f.select :expansion, Expansion.all.order(:released_at).map{|e| [e.abbr, e.name]}, class: "form-control" %>
       </div>

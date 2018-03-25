@@ -1,13 +1,13 @@
-<h1>エキスパンション一覧</h1>
-
-<hr>
-<div>
-  <%= link_to "追加", new_expansion_path %>
+<div class="expansion_header">
+  <h1>
+    エキスパンション一覧
+    <%= link_to "追加", new_expansion_path, class:'btn btn-sm btn-default pull-right right' %>
+  </h1>
+  <hr>
 </div>
 
-<hr>
 <div class="contents">
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th>name</th>

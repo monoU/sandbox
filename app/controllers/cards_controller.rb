@@ -27,31 +27,39 @@ class CardsController < ApplicationController
     redirect_to cards_path
   end
 
+  # todo 現状、一枚目が登録済みだとロールバック走って、後続が全くインポートされてない
   def import
     begin
       count = 0
-      File.open('app/assets/file/ixalan.txt') do |file|
+      File.open("app/assets/file/ixalan.txt") do |file|
         file.each do |line|
           if line.match(/\d\./)
             @card = Card.new
-            @card.number = line.sub(/\./, '').chomp
+            @card.number = line.sub(/\./, "").chomp
           elsif line.match(/\p{blank}*英語名：/)
-            @card.name = line.sub(/\p{blank}*英語名：/, '').chomp
+            @card.name = line.sub(/\p{blank}*英語名：/, "").chomp
           elsif line.match(/\p{blank}*日本語名：/)
-            @card.name_ja = line.sub(/\p{blank}*日本語名：/, '').sub(/（.*/, '').chomp
+            @card.name_ja = line.sub(/\p{blank}*日本語名：/, "").sub(/（.*/, "").chomp
           elsif line.match(/\p{blank}*コスト：/)
-            @card.cost = line.sub(/\p{blank}*コスト：/, '').chomp
+            @card.cost = line.sub(/\p{blank}*コスト：/, "").chomp
           elsif line.match(/\p{blank}*タイプ：/)
-            @card.types = line.sub(/\p{blank}*タイプ：/, '').sub(/\s+---.*/, '').chomp
+            @card.types = line.sub(/\p{blank}*タイプ：/, "").sub(/\s+---.*/, "").chomp
+            if @card.types == "クリーチャー"
+              creature_types = []
+              line.match(/\p{blank}*タイプ：クリーチャー --- (.+)/)[1].split("・").each do |type|
+                creature_types << type.sub(/\(.+\)/, "")
+              end
+              @card.creature_type = creature_types.join(", ")
+            end
           elsif line.match(/\p{blank}*Ｐ／Ｔ：/)
-            @card.power = line.sub(/\p{blank}*Ｐ／Ｔ：/, '').split("\/")[0].chomp
-            @card.toughness = line.sub(/\p{blank}*Ｐ／Ｔ：/, '').split("\/")[1].chomp
+            @card.power = line.sub(/\p{blank}*Ｐ／Ｔ：/, "").split("\/")[0].chomp
+            @card.toughness = line.sub(/\p{blank}*Ｐ／Ｔ：/, "").split("\/")[1].chomp
           elsif line.match(/\p{blank}*イラスト：/)
-            @card.artist = line.sub(/\p{blank}*イラスト：/, '').chomp
+            @card.artist = line.sub(/\p{blank}*イラスト：/, "").chomp
           elsif line.match(/\p{blank}*セット：/)
-            @card.expansion = line.sub(/\p{blank}*セット：/, '').chomp
+            @card.expansion = line.sub(/\p{blank}*セット：/, "").chomp
           elsif line.match(/\p{blank}*稀少度：/)
-            case (line.sub(/\p{blank}*稀少度：/, '').chomp)
+            case (line.sub(/\p{blank}*稀少度：/, "").chomp)
               when "神話レア" then @card.rarity = 0
               when "レア" then @card.rarity = 1
               when "アンコモン" then @card.rarity = 2
@@ -90,6 +98,6 @@ class CardsController < ApplicationController
   end
 
   def search_card_parameters
-    params.require(:search_card).permit(:expansion, :types, :rarity)
+    params.require(:search_card).permit(:name, :expansion, :types, :rarity)
   end
 end
