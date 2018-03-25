@@ -6,9 +6,8 @@ Rails.application.routes.draw do
 
   resources :cards, except: [:show] do
     collection do
-      post :search
-      post :import
-      post :destroy_all
+      get :search
+      post :search, :import, :destroy_all
     end
   end
 

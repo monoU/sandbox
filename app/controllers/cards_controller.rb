@@ -5,12 +5,15 @@ class CardsController < ApplicationController
   end
 
   def search
-    @search = Search::Card.new(search_card_parameters)
-    # 検索条件によって検索
-    @cards = @search.match
-    @action = "search"
-
-    render :action => "index"
+    if params[:search_card].present?
+      @search = Search::Card.new(search_card_parameters)
+      # 検索条件によって検索
+      @cards = @search.match
+      @action = "search"
+      render :action => "index"
+    else
+      redirect_to cards_path
+    end
   end
 
   def new
