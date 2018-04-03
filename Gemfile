@@ -8,10 +8,6 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-# Use mysql2 for development
-gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -41,6 +37,10 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+  # Use mysql2 for development
+  gem 'mysql2'
 end
 
 group :development do
@@ -50,6 +50,12 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :production do
+  # 本番ではpostgressを使用する
+  gem 'pg', '0.17.1'
+  gem 'rails_12factor', '0.0.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
