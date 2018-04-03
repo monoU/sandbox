@@ -54,7 +54,7 @@ end
 
 group :production do
   # 本番ではpostgressを使用する
-  gem 'pg', '0.17.1'
+  gem 'pg', '~> 0.18'
   gem 'rails_12factor', '0.0.2'
 end
 
