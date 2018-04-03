@@ -16,7 +16,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+# Use mysql2 for development
+gem 'mysql2'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -39,8 +40,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  # Use mysql2 for development
-  gem 'mysql2'
 end
 
 group :development do
@@ -54,7 +53,6 @@ end
 
 group :production do
   # 本番ではpostgressを使用する
-  gem 'pg', '~> 0.18'
   gem 'rails_12factor', '0.0.2'
 end
 
