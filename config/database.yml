@@ -31,6 +31,6 @@ test:
 
 production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  database: heroku_a7ef386c07afb43
+  username: b71b925b605133
+  password: <%= ENV['DATABASE_PASSWORD'] %>
