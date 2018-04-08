@@ -1,29 +1,58 @@
 <h1>カード追加</h1>
-<%= form_for @card do |f| %>
-  <%= f.label :number %>
-  <%= f.number_field :number %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :name_ja %>
-  <%= f.text_field :name_ja %>
-  <%= f.label :cost %>
-  <%= f.text_field :cost %>
-  <%= f.label :expansion %>
-  <%= f.text_field :expansion %>
-  <%= f.label :colour %>
-  <%= f.text_field :colour %>
-  <%= f.label :types %>
-  <%= f.text_field :types %>
-  <%= f.label :power %>
-  <%= f.number_field :power %>
-  <%= f.label :toughness %>
-  <%= f. number_field :toughness %>
-  <%= f.label :artist %>
-  <%= f.text_field :artist %>
-  <%= f.label :rarity %>
-  <%= f.text_field :rarity %>
 
-  <div>
-    <%= f.submit "追加", class:'btn btn-sm btn-primary'%>
-  </div>
-<% end %>
+<div class="input-form">
+  <fieldset class="form-group">
+  <%= form_for @card do |f| %>
+      <div class="form-group">
+        <legend>カード番号</legend>
+        <%= f.text_field :number, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <legend>カード名</legend>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <legend>カード日本語名</legend>
+        <%= f.text_field :name_ja, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <legend>コスト</legend>
+        <%= f.text_field :cost, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <legend>エキスパンション</legend>
+        <%= f.select :expansion, Expansion.all.order(:released_at).map{|e| [e.abbr, e.name]}, class: "form-control" %>
+      </div>
+        <div class="form-group">
+        <legend>色</legend>
+        <%= f.text_field :colour, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <legend>カードタイプ</legend>
+        <%= f.text_field :types, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <legend>パワー</legend>
+        <%= f.text_field :power, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <legend>タフネス</legend>
+        <%= f.text_field :toughness, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <legend>アーティスト</legend>
+        <%= f.text_field :artist, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <legend>レアリティ</legend>
+        <%= f.select :rarity, Card.rarities.keys.to_a, include_blank: true, class: "form-control" %>
+      </div>
+    <hr>
+    <div>
+      <%= f.submit "追加", class:'btn btn-sm btn-primary'%>
+    </div>
+  <% end %>
+  </fieldset>
+</div>
+
+
