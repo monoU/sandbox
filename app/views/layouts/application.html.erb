@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title>Betrayers of Kamogawa</title>
   <%= csrf_meta_tags %>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -10,6 +10,40 @@
 </head>
 
 <body>
+
+  <% #ナビゲーション %> 
+  <nav class="navbar navbar-default">
+    <ul class="nav navbar-nav navbar-left">
+      <li class="title">
+        <%= link_to "Betrayers of Kamogawa", {:controller => "home", :action => "index"}%>
+      </li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <%= link_to "ホーム", {:controller => "home", :action => "index"}%>
+      </li>
+      <li>
+        <%= link_to "カードリスト", {:controller => "cards", :action => "index"}%>
+      </li>
+      <li>
+        <%= link_to "エキスパンション", {:controller => "expansions", :action => "index"}%>
+      </li>
+      <li>
+        <%= link_to "メンバー", {:controller => "expansions", :action => "index"}%>
+      </li>
+      <li>
+        <%= link_to "掲示板", {:controller => "expansions", :action => "index"}%>
+      </li>
+      <li>
+        <%= link_to "コンタクト" %>
+      </li>
+      <li>
+        <%= link_to "" %>
+      </li>
+    </ul>
+  </nav>
+
   <div class="container">
   <%= yield %>
   </div>

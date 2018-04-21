@@ -2,29 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.home_header {
+.image {
+  height: 50em;
   background-image: image-url("black_lotus.jpg");
   background-position: center;
-  padding: 10px;
-}
-
-.login_info {
-  text-align: right;
-}
-
-.page_header {
-  color: white;
-  padding: 50px;
-  height: 200px;
-}
-
-.home_body {
-  height: 300px;
-}
-
-.home_footer {
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-image: image-url("black_lotus.jpg");
-  background-position: bottom;
 }
