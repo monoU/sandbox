@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
-  get 'home/index'
-
   resources :expansions, except: [:show]
 
   resources :cards, except: [:show] do
@@ -11,5 +8,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'home#index'
+  root :to => 'index#top'
 end

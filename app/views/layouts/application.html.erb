@@ -11,13 +11,6 @@
 
 <body>
   <div class="container">
-    <% # deviseで利用 %>
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
   <%= yield %>
   </div>
 </body>
