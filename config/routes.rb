@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'home/index'
+
   resources :expansions, except: [:show]
 
   resources :cards, except: [:show] do
@@ -8,5 +10,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root :to => 'index#top'
+  root :to => 'home#index'
 end
