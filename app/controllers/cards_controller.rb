@@ -27,16 +27,13 @@ class CardsController < ApplicationController
     redirect_to cards_path
   end
 
-  # todo 現状、一枚目が登録済みだとロールバック走って、後続が全くインポートされてない
   def import
     begin
       count = 0
-      File.open("app/assets/file/ixalan.txt") do |file|
+      File.open("app/assets/file/master.txt") do |file|
         file.each do |line|
-          if line.match(/\d\./)
+          if line.match(/\p{blank}*英語名：/)
             @card = Card.new
-            @card.number = line.sub(/\./, "").chomp
-          elsif line.match(/\p{blank}*英語名：/)
             @card.name = line.sub(/\p{blank}*英語名：/, "").chomp
           elsif line.match(/\p{blank}*日本語名：/)
             @card.name_ja = line.sub(/\p{blank}*日本語名：/, "").sub(/（.*/, "").chomp
@@ -68,6 +65,7 @@ class CardsController < ApplicationController
             @card.save!
             count += 1
           end
+          p "--- imported #{count} cards " if count % 1000 == 0
         end
       end
       flash[:notice] = "#{count}枚インポートしました"
@@ -86,7 +84,7 @@ class CardsController < ApplicationController
   end
 
   def destroy_all
-    Card.destroy_all
+    Card.all.destroy_all
     flash[:notice] = "カードを全て削除しました"
     redirect_to cards_path
   end
